@@ -4,7 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from sqlalchemy import Column, Integer, String, Date, DateTime, ForeignKey
 
-db = SQLAlchemy()
+from app import db
 
 
 class AgeRange(db.Model):
