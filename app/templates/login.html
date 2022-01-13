@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block right_up_content %}
+    <main class="form-signin p-5 w-75 position-absolute top-0 start-50 translate-middle-x">
+    <h1 class="h3 mb-3 fw-normal">Авторизация</h1>
+
+        {#    Блок с системными сообщениями#}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="alert alert-warning" role="alert">
+            {% for message in messages %}
+                {{ message }}<br>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('process_login') }}" method="POST"  novalidate>
+        {{ form.hidden_tag() }}
+        <div class="form-floating">
+            {{ form.email(size=32) }}
+            <label for="floatingInput">{{ form.email.label }}</label>
+            {% for error in form.email.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+        <div class="form-floating">
+            {{ form.password(size=32) }}
+            <label for="floatingPassword">{{ form.password.label }}</label>
+            {% for error in form.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+        <div class="form-floating">
+            {{ form.telegram(size=32) }}
+            <label for="floatingPassword">{{ form.telegram.label }}</label>
+            {% for error in form.telegram.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </div>
+        <div class="checkbox mb-3">
+            <label>
+            {{ form.remember_me() }} {{ form.remember_me.label }}
+          </label>
+        </div>
+        <div class="pb-3" >
+            <a type="button" href="{{ url_for('register') }}">Регистрация</a>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">{{ form.submit() }}</button>
+    </form>
+    </main>
+{% endblock %}

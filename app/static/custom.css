@@ -1,0 +1,100 @@
+.height_90 {
+  height: 90vh;
+}
+
+.height_10 {
+  height: 10vh;
+}
+
+/* Стили для базового шаблона*/
+.left_base {
+  background-color: #424bb2;
+  /*color: #15ced2;*/
+}
+
+.right_base {
+  background-color: #e6e6e6;
+  /*color: #404cb0;*/
+}
+
+.base_row {
+  margin: 0
+}
+
+.padding_none{
+  padding: 0;
+  margin: 0;
+}
+
+.main_button {
+  color: #424bb2;
+  font-weight: bold;
+  font-size: 20px;
+  background: #ffffff;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  border: none;
+  box-shadow: none;
+  white-space: pre-wrap;
+  line-height: 1;
+  z-index: 2;
+}
+
+.main_button:hover{
+  color: #424bb2;
+  font-weight: bold;
+  font-size: 20px;
+  background: #ffffff;
+  border: 1px solid #15ced2;
+  box-shadow: none;
+  white-space: pre-wrap;
+  line-height: 1;
+  z-index: 2;
+}
+
+.main_button:focus{
+  color: #424bb2;
+  font-weight: bold;
+  font-size: 20px;
+  background: #ffffff;
+  border: none ;
+  box-shadow: none;
+  white-space: pre-wrap;
+  line-height: 1;
+  z-index: 2;
+}
+
+.main_button:active{
+  color: #424bb2;
+  font-weight: bold;
+  font-size: 20px;
+  background: #ffffff;
+  border: 1px solid #15ced2;
+  box-shadow: none;
+  white-space: pre-wrap;
+  line-height: 1;
+  z-index: 2;
+}
+
+.login_button{
+  background-color: #424bb2;
+  color: #ffffff;
+  margin-right: 20px;
+}
+
+/* Стили для главной страницы*/
+
+.organize_game {
+  color: #15ced2;
+  font-weight: bold;
+  font-size: 55px;
+  text-decoration: none;
+}
+
+.take_game {
+  color: #404cb0;
+  font-weight: bold;
+  font-size: 55px;
+  text-decoration: none;
+}
