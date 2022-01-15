@@ -1,11 +1,15 @@
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
-
 from sqlalchemy import Column, Integer, String, Date, DateTime, ForeignKey
 
-db = SQLAlchemy()
+from app import app, db
+from app import login_manager
+from constans import UsersRolesEnum
 
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
 class AgeRange(db.Model):
     __tablename__ = 'age_ranges'
@@ -22,7 +26,7 @@ class Game(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     sport_ground_id = db.Column(db.Integer, ForeignKey('sport_grounds.id'), index=True, nullable=False)
-    creator_user_id = db.Column(db.Integer, ForeignKey('users.id'), index=True, nullable=False)
+    user_creation_id = db.Column(db.Integer, ForeignKey('users.id'), index=True, nullable=False)
     start_time = db.Column(db.DateTime, nullable=False)
     end_time = db.Column(db.DateTime, nullable=False)
     max_players = db.Column(db.Integer)
@@ -31,9 +35,9 @@ class Game(db.Model):
     type_game = db.Column(db.String(64))
 
     sport_ground = db.relationship('SportGround', backref='games', lazy="joined")
-    creator_user = db.relationship('User', backref='games', lazy="joined")
     age_range = db.relationship('AgeRange', backref='games', lazy="joined")
     game_level = db.relationship('GameLevel', backref='games', lazy="joined")
+    user_creation = db.relationship('User', back_populates='games', lazy="joined")
 
     def __repr__(self):
         return f'<Game ID {self.id}, sport ground id {self.sport_ground_id} >'
@@ -63,6 +67,7 @@ class SportGround(db.Model):
     __tablename__ = 'sport_grounds'
 
     id = db.Column(db.Integer, primary_key=True)
+    original_id = db.Column(db.Integer, unique=True)
     ground_type = db.Column(db.String(120))
     ground_title = db.Column(db.String(120))
     location_title = db.Column(db.String(120))
@@ -94,30 +99,28 @@ class Photo(db.Model):
         return f'<Photo id {self.id}, photos path {self.path}>'
 
 
-class UserRole(db.Model):
-    __tablename__ = 'user_roles'
-
-    id = db.Column(db.Integer, primary_key=True)
-    role_name = db.Column(db.String(64), unique=True)
-
-    def __repr__(self):
-        return f'<User role {self.role_name}>'
-
-
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True)
-    password_hash = db.Column(db.String(120))
+    password = db.Column(db.String(120))
     telegram = db.Column(db.String(120), unique=True)
-    role_id = db.Column(db.Integer, ForeignKey('user_roles.id'), index=True, nullable=False)
+    role = db.Column(db.Enum(UsersRolesEnum, values_callable=lambda obj: [e.value for e in obj]),
+                     nullable=False,
+                     default=UsersRolesEnum.USER.value,
+                     server_default=UsersRolesEnum.USER.value)
 
-    role = db.relationship('UserRole', backref='users')
-    games = db.relationship('Game', secondary="users_games", backref='users')
+    games = db.relationship('Game', secondary="users_games", backref=db.backref('users', lazy='dynamic'))
 
     def __repr__(self):
         return f'<User id {self.id}, email {self.email}>'
+
+    def set_password(self, password):
+        self.password = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
 
 
 class UserGame(db.Model):

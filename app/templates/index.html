@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{# 1. Блок для левой полонвинки главной страницы#}
+{% block left_up_content %}
+<div class="row h-50 position-absolute top-50 start-50 translate-middle">
+    <a class="text-uppercase organize_game"
+       href="#">Организовать<br>игру</a>
+</div>
+<div class="row">
+
+</div>
+{% endblock %}
+
+{# 2. Блок для правой полонвинки главной страницы#}
+{% block right_up_content %}
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="alert alert-warning" role="alert">
+        {% for message in messages %}
+            {{ message }}<br>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endwith %}
+
+<div class="row h-50 position-absolute top-50 start-50 translate-middle">
+    <a class="text-uppercase take_game"
+       href="#">Принять участие в игре</a>
+</div>
+<div class="row">
+
+</div>
+{% endblock %}
+
