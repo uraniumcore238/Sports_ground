@@ -2,11 +2,12 @@
 
 {# 1. Блок для левой полонвинки главной страницы#}
 {% block left_up_content %}
-<div class="row h-50 position-absolute top-50 start-50 translate-middle">
-    <a class="text-uppercase organize_game"
-       href="#">Организовать<br>игру</a>
+<div class="row h-50 position-relative">
+    <div class="position-absolute top-50 end-0 translate-middle-y sg_padding_left_25pr">
+        <p class="organize_game" >СОБЕРИ КОМАНДУ<br>и сыграй :)</p>
+    </div>
 </div>
-<div class="row">
+<div class="row h-50">
 
 </div>
 {% endblock %}
@@ -24,11 +25,12 @@
     {% endif %}
 {% endwith %}
 
-<div class="row h-50 position-absolute top-50 start-50 translate-middle">
-    <a class="text-uppercase take_game"
-       href="#">Принять участие в игре</a>
+<div class="row h-50 position-relative">
+    <div class="position-absolute top-50 start-0 translate-middle-y sg_padding_left_25pr">
+        <a class="sg_text_area_choice" href="{{ url_for('sport_ground_choice') }}">ВЫБРАТЬ площадку</a>
+    </div>
 </div>
-<div class="row">
+<div class="row h-50">
 
 </div>
 {% endblock %}

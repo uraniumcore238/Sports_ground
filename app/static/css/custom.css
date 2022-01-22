@@ -1,27 +1,42 @@
-.height_90 {
+.sg_height_90vh {
   height: 90vh;
 }
 
-.height_10 {
+.sg_height_80vh {
+  height: 80vh;
+}
+
+.sg_height_10vh {
   height: 10vh;
+}
+
+
+.sg_width_70{
+  width: 70%;
+}
+
+.sg_padding_left_25pr{
+  padding-left: 25%;
+}
+
+.sg_padding_right_25pr{
+  padding-right: 25%;
 }
 
 /* Стили для базового шаблона*/
 .left_base {
   background-color: #424bb2;
-  /*color: #15ced2;*/
 }
 
 .right_base {
   background-color: #e6e6e6;
-  /*color: #404cb0;*/
 }
 
 .base_row {
   margin: 0
 }
 
-.padding_none{
+.sg_padding_none{
   padding: 0;
   margin: 0;
 }
@@ -92,9 +107,74 @@
   text-decoration: none;
 }
 
-.take_game {
+.sg_text_area_choice {
   color: #404cb0;
   font-weight: bold;
   font-size: 55px;
   text-decoration: none;
+}
+
+.sg_text_area_choice {
+  color: #404cb0;
+  font-weight: bold;
+  font-size: 55px;
+  text-decoration: none;
+}
+
+.sg_text_area_choice:hover,
+.sg_text_area_choice:focus,
+.sg_text_area_choice:active {
+	color: #15ced2;
+}
+
+/* Стили для страницы спорт площадки*/
+
+.sg_info_row{
+  background-color: #FFB98C;
+  color: black;
+}
+
+.sg_label_form_text{
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.sg_label_form_text_href{
+  color: #15ced2;
+}
+
+.sg_h2 {
+  color: #15ced2;
+  font-weight: bold;
+  font-size: 25px;
+  text-decoration: none;
+}
+
+/* CSS */
+.list-counter-square {
+list-style: none;
+margin: 0;
+padding: 0;
+}
+.list-counter-square>li {
+position: relative;
+display: block;
+margin-bottom: .25rem;
+padding: .325rem .825rem .325rem 1.325rem;
+color: #fff;
+background: #C2185B;
+}
+.list-counter-square>li:last-child {
+margin-bottom: 0;
+}
+.list-counter-square>li::before {
+content: "";
+position: absolute;
+left: 0;
+top: 0;
+bottom: 0;
+width: 0.5rem;
+background: #ec407a;
 }
