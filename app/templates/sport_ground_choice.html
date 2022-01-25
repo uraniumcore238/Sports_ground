@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{# 1. Блок для левой полонвинки главной страницы#}
+{% block left_up_content %}
+<div class="row h-50 position-relative">
+    <div class="position-absolute top-50 end-0 translate-middle-y sg_padding_left_25pr">
+        <p class="organize_game" >ВЫБЕРИ ПЛОЩАДКУ<br>на карте</p>
+    </div>
+</div>
+<div class="row h-50">
+
+</div>
+{% endblock %}
+
+
+{# 2. Блок для правой полонвинки главной страницы#}
+{% block right_up_content %}
+<div class="row w-100 h-100 jumbotron jumbotron-fluid " >
+    <div class="row  sg_padding_none position-relative">
+        <div id="map" class = "w-100 h-100 sg_padding_none"></div>
+    </div>
+</div>
+{% endblock %}
+
