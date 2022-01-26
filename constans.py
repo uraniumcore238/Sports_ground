@@ -1,6 +1,7 @@
 import enum
 from app import db
 
+
 class UsersRolesEnum(enum.Enum):
     ADMIN = "admin"
     USER = "user"

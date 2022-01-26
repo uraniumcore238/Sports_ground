@@ -7,9 +7,11 @@ from app import app, db
 from app import login_manager
 from constans import UsersRolesEnum
 
+
 @login_manager.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
 
 class AgeRange(db.Model):
     __tablename__ = 'age_ranges'

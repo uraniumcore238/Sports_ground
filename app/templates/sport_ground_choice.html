@@ -15,9 +15,42 @@
 
 {# 2. Блок для правой полонвинки главной страницы#}
 {% block right_up_content %}
-<div class="row w-100 h-100 jumbotron jumbotron-fluid " >
+<div class="row w-100 h-100 jumbotron jumbotron-fluid">
     <div class="row  sg_padding_none position-relative">
-        <div id="map" class = "w-100 h-100 sg_padding_none"></div>
+
+        <link rel="stylesheet" href="static\css\style_map.css">
+        <div id="map" class = "w-100 h-100 sg_padding_none map">
+
+            <h2>{{ h2_map_text }}</h2>
+            <script src="https://api-maps.yandex.ru/2.1/?lang=ru-RU&amp;apikey={{ config.YANDEX_API_KEY }}"></script>
+            <script src="https://yandex.st/jquery/2.2.3/jquery.min.js"></script>
+            <script type="text/javascript">
+            ymaps.ready(init);
+            function init () {
+                var myMap = new ymaps.Map('map', {
+                        center: [55.76, 37.64],
+                        zoom: 10
+                    }, {
+                        searchControlProvider: 'yandex#search'
+                    }),
+                    objectManager = new ymaps.ObjectManager({
+
+                        clusterize: true,
+
+                        gridSize: 32,
+                        clusterDisableClickZoom: true
+                    });
+
+
+                objectManager.objects.options.set('preset', 'islands#greenDotIcon');
+                objectManager.clusters.options.set('preset', 'islands#greenClusterIcons');
+                myMap.geoObjects.add(objectManager);
+
+            objectManager.add({{table|safe}});
+            }</script>
+
+        </div>
+
     </div>
 </div>
 {% endblock %}

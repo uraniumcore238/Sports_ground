@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
+import json
 from datetime import datetime, timedelta
 from flask import render_template, flash, redirect, url_for, abort
 from flask_login import current_user, login_user, logout_user # для обработки формы логина и разлогина
 from sqlalchemy import and_
 
+import create_json_from_db_with_orm
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, AreaForm
 from app.models import User, Game, SportGround
-from config import Config
 
 
 @app.route('/')
@@ -112,9 +113,12 @@ def sport_ground_choice():
     Выбор спортивной площадки
     :return:
     '''
-    config = Config()
-    title = "Выбор спортивной площадки"
-    return render_template('sport_ground_choice.html', title=title, key=config)
+    h2_map_text = "Cпортивныe площадки города Москвы"
+    table = create_json_from_db_with_orm.create_map_data_json_with_orm()
+    return render_template('sport_ground_choice.html',
+                           h2_map_text=h2_map_text,
+                           table=json.dumps(table, ensure_ascii=False)
+                           )
 
 
 @app.route('/area/<int:sport_ground_id>/')
