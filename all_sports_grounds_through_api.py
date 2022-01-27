@@ -46,7 +46,6 @@ def save_sports_grounds_data(original_id,
                              latitude,
                              longitude):
     grounds_exists = SportGround.query.filter(SportGround.original_id == original_id).count()
-    # grounds_exists = SportGround.query(exists().where(SportGround.original_id == 'original_id')).scalar()
 
     if not grounds_exists:
         new_sports_grounds = SportGround(original_id=original_id,
